@@ -1,11 +1,22 @@
-from flask import Flask
+import telebot
+import pangea.exceptions as pe
+from pangea.config import PangeaConfig
+from pangea.services import Redact
+import fireworks.client
+import os
 
-app = Flask(__name__)
+TELE_TOKEN = os.environ.get("tele-token")
 
-@app.route('/')
-def home():
-    return 'Hello, World!'
+bot = telebot.TeleBot(TELE_TOKEN)
+bot.set_webhook()
 
-@app.route('/about')
-def about():
-    return 'About'
+@bot.message_handler(func=lambda message: True)
+def handle_message(message):
+
+    suggestion = "To generate text/image, you can use the /generate_text or /generate_image command followed by your prompt"
+
+    bot.send_message(message.chat.id, suggestion)
+
+
+bot.infinity_polling(timeout=10, long_polling_timeout = 5)
+
