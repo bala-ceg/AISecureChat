@@ -5,7 +5,7 @@ from pangea.services import Redact
 import fireworks.client
 import os
 
-TELE_TOKEN = os.environ.get("tele-token")
+TELE_TOKEN = os.environ.get("teletoken")
 
 bot = telebot.TeleBot(TELE_TOKEN)
 bot.set_webhook()
