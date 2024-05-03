@@ -27,13 +27,15 @@ def get_prompt(message):
         redacted_msg = go_redact(prompt)
         print(f"warning message: {redacted_msg}")
 
-        bot.delete_message(message.chat.id, message.message_id)
-        bot.send_message(message.chat.id, "PII Information Found")
-        bot.send_message(message.chat.id, redacted_msg)
+        if redacted_msg != message.text:
+            bot.delete_message(message.chat.id, message.message_id)
+            bot.send_message(message.chat.id, "PII Information Found")
+            bot.send_message(message.chat.id, redacted_msg)
+            prompt = redacted_msg
         bot.send_message(message.chat.id, "Waiting for LLM to fetch the result")
         completion = fireworks.client.ChatCompletion.create(
               "accounts/fireworks/models/llama-v2-7b-chat",
-              messages=[{"role": "user", "content": redacted_msg}],
+              messages=[{"role": "user", "content": prompt}],
               temperature=0.7,
               n=2,
               max_tokens=400)
