@@ -1,5 +1,5 @@
 # AISecureChat
-Converse Confidently with AISecureChat powered by Pangea, Where AI Intelligence Meets Ironclad Security
+Converse Confidently with AISecureChat, Where AI Intelligence Meets Ironclad Security
 
 # Usage
 Visit the following [link](https://web.telegram.org/k/#@pangeasecurity_bot) to directly chat with the bot
